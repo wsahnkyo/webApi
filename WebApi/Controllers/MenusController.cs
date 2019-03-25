@@ -32,6 +32,41 @@ namespace WebApi.Controllers
             dic.Add("number", 11);
             dic.Add("String", "aaa");
             return dic;
+           
+        }
+
+
+        [HttpGet("list")]
+        public ActionResult<Dictionary<string, object>> list()
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            List<Menu> menus = new List<Menu>();
+            for (int i = 0; i <= 3; i++)
+            {
+                Menu menu = new Menu();
+                menu.Id = i.ToString();
+                menu.MenuName = "目录名称" + i;
+                menu.Pid = i.ToString();
+                menus.Add(menu);
+            }
+            List<Book> books = new List<Book>();
+            for (int i = 0; i <= 3; i++)
+            {
+                Book book = new Book();
+                book.Id = i.ToString();
+                book.Price = new Random().Next(1, 1000);
+                book.Author = i.ToString();
+                book.BookName = "图书名称" + i;
+                book.Category = "图书类别" + i;
+                books.Add(book);
+            }
+
+            dic.Add("menuList", menus);
+            dic.Add("bookList", books);
+            dic.Add("boolean", true);
+            dic.Add("number", 11);
+            dic.Add("String", "aaa");
+            return dic;
         }
 
         [HttpGet("{id:length(24)}", Name = "GetMenu")]
